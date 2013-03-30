@@ -39,6 +39,9 @@ $.fn.S3Uploader = (options) ->
         file = data.files[0]
         file.unique_id = Math.random().toString(36).substr(2,16)
 
+        #added in the call for adding the filename to the DOM, saw no other way
+        $('#filenames').append('<tr><td>' + data.files[0].name + '</td></tr>')
+        
         unless settings.before_add and not settings.before_add(file)
           current_files.push data
           data.context = $($.trim(tmpl("template-upload", file))) if $('#template-upload').length > 0
